@@ -1,0 +1,38 @@
+<style type="text/css">
+    body
+    {
+        font-family: arial;
+    }
+
+    th,td
+    {
+        margin: 0;
+        text-align: center;
+        border-collapse: collapse;
+        outline: 1px solid #000;
+    }
+
+    td
+    {
+        padding: 5px 10px;
+    }
+#vv
+    {
+        margin: 0;
+        text-align: center;
+        border-collapse: collapse;
+        outline: 1px solid #e3e3e3;
+		 padding: 5px 10px;
+      
+    }
+    th
+    {
+        background: #666;
+        color: white;
+        padding: 5px 10px;
+    }
+#vvv{
+	background-color:#f2f2f2;
+}
+   
+    </style>

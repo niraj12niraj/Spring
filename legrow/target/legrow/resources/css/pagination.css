@@ -1,0 +1,17 @@
+<style>
+ul.pagination {
+	display: inline-block;
+	padding: 3px;
+	margin: 3px;
+	color:green;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+	color: green;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+</style>

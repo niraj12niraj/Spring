@@ -1,0 +1,88 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+	<mvc:annotation-driven />
+	<context:component-scan base-package="com.supersoft" />
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/pages/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<mvc:resources mapping="/resources/**" location="/resources/"
+		cache-period="31556926" />
+
+
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		 <property name="url"
+			value="jdbc:mysql://localhost:3306/LEGGERO_IDEA?createDatabaseIfNotExist=true" />
+		<property name="username" value="root" />
+		<property name="password" value="niraj" />
+		<!--  <property name="url" value="jdbc:mysql://localhost:3306/wwwleggr_ow?createDatabaseIfNotExist=true" 
+			/> <property name="username" value="wwwleggr_ow" /> <property name="password" 
+			value="leggrow123" />  -->
+		<property name="validationQuery" value="SELECT 1" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.supersoft.model" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!--<property name="maxUploadSize" value="225280"/> -->    <!--set 220 KB for -->
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<bean id="ExcelDAO" class="com.supersoft.dao.ExcelDAOImpl" />
+	<bean id="excelService" class="com.supersoft.service.ExcelServiceImpl" />	
+	
+	<bean id="student_FeeDetailDAO" class="com.supersoft.dao.Student_FeeDetailDAOImpl" />
+	<bean id="student_FeeDetailService" class="com.supersoft.service.Student_FeeDetailServiceImpl" />	
+	
+	<bean id="studentAttedenceDAO" class="com.supersoft.dao.StudentAttedenceDAOImpl" />
+	<bean id="studentAttedenceService" class="com.supersoft.service.StudentAttedenceServiceImpl"/>
+	
+	<!-- <bean id="student_FeeDetailDAO" class="com.supersoft.dao.Student_FeeDetailDAOImpl" />
+	<bean id="student_FeeDetailService" class="com.supersoft.service.Student_FeeDetailServiceImpl" /> -->
+	
+	<bean id="empRegistrationDAO" class="com.supersoft.dao.EmpRegistrationDAOImpl" />
+	<bean id="empRegistrationService" class="com.supersoft.service.EmpRegistrationServiceImpl" />
+	
+	<bean id="empAttedenceDAO" class="com.supersoft.dao.EmpAttedenceDAOImpl" />
+	<bean id="empAttedenceService" class="com.supersoft.service.EmpAttedenceServiceImp" />		
+	
+	<bean id="forgotPassDAO" class="com.supersoft.dao.ForgotPassDAOImpl" />
+	<bean id="forgotPassService" class="com.supersoft.service.ForgotPassServiceImpl" />	
+	
+	<bean id="userProfileDAO" class="com.supersoft.dao.UserProfileDAOImpl" />
+	<bean id="userProfileService" class="com.supersoft.service.UserProfileServiceImpl" />
+
+
+	<!-- <bean id="DAO" class="com.supersoft.dao.DAOImpl"/> <bean id="Service" 
+		class="com.supersoft.service.ServiceImpl"/> -->
+
+
+</beans>
